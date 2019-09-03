@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inspect a Device's TWAIN capabilities With DWT</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js?v=20190628"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?v=20190628"></script>
+    <script src="Scripts/tablesorter/js/jquery.tablesorter.min.js?v=20190628"></script>
+    <script src="https://unpkg.com/dwt/dist/dynamsoft.webtwain.min.js"> </script>
+    <link href="Scripts/contextMenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/contextMenu/jquery.contextMenu.js?v=20190628" type="text/javascript"></script>
+    <script src="Scripts/contextMenu/jquery.ui.position.min.js?v=20190628" type="text/javascript"></script>
+    <link rel="stylesheet" href="Style/ds.demo.css">
+</head>
+
+<body>
+    <div id="ValueSelector" title="Select A Value" class="hidden" style="min-width: 150px;">
+    </div>
+    <div id="DSMSelect" title="Select A DataSource Manager" class="hidden" style="text-align:center;">
+        <ul style="margin:6px;">
+            <li>
+                <label for="DSMV1"><input type="radio" name="DSMV" id="DSMV1" checked="checked">
+                    Use TWAIN Data Source Manager 1.x
+                </label>
+            </li>
+            <li>
+                <label for="DSMV2"><input type="radio" name="DSMV" id="DSMV2"> Use TWAIN
+                    Data Source Manager 2.x
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div id="main" class="pt5">
+        <div class="container">
+            <input class="w49p mb15" type="button" value="Reselect Data Source Manager" onclick="SelectADSM();" />
+            <input class="w49p mb15 fr" type="button" value="Select Another Data Source" onclick="SelectADS();" />
+
+            <div id="capabilities" class="noselect clearfix mb15"
+                style="height: 500px; border:solid 1px grey; overflow: auto;">
+                <table id="tblCAPList">
+                    <thead id="tblCAPListHead">
+                        <tr>
+                            <th style="width:35%;">Capability</th>
+                            <th style="width:20%;">Current Value</th>
+                            <th style="width:15%;">Value Type</th>
+                            <th style="width:10%;">Container</th>
+                            <th style="width:5%;">#</th>
+                            <th style="width:15%;">Operation Type</th>
+                            <th style="display: none;">Original Index</th>
+                            <th style="display: none;">Runtime Index</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tBodyCAPList"></tbody>
+                </table>
+            </div>
+            <input type="button" id="btnScanEx" value="Start Scanning" class="btn w100p bgBlue mb15"
+                onclick="AcquireImage();" />
+            <input class="w49p mb15" type="button" value="Close Data Source" onclick="closeDS();" />
+            <input class="w49p mb15 fr" type="button" value="Close Data Source Manager" onclick="disconnectDSM();" />
+        </div>
+        <div class="container">
+            <div id="DWTContainer" class="mt20 hidden">
+                <div id="dwtcontrolContainer"></div>
+            </div>
+            <div id="status_text" class="mt20 noselect"></div>
+            <input type="button" value="Clear All Information" class="btn w100p" onclick="clearInfo();" />
+        </div>
+    </div>
+
+    <script src="Scripts/twain.js?v=20190628"></script>
+    <script src="Scripts/twainstring.js?v=20190628"></script>
+    <script src="Scripts/twainapp.js?v=20190628"></script>
+</body>
+
+</html>
